@@ -5,26 +5,31 @@ export default function TextArea(props) {
 
     const upperCase = () => {
         setText(text.toUpperCase());
+        props.passAlert("Text Is Converted Into Upper Case")
     }
 
     const lowerCase = () => {
         setText(text.toLowerCase());
+        props.passAlert("Text Is Converted Into Lower Case")
     }
 
     const resetText = () => {
         setText("")
+        props.passAlert("Text Is Cleared")
     }
 
     const trimText = () => {
         let trimOne = text.replace(/\s+/g, " ")
         setText(trimOne)
+        props.passAlert("Text Is Trimed")
     }
 
     const copyText = () => {
         let copyOne = document.getElementById("textBox")
         copyOne.select()
         navigator.clipboard.writeText(copyOne.value)
-        window.getSelection().removeAllRanges()
+        // window.getSelection().removeAllRanges()
+        props.passAlert("Text Is Copied To Your Clipboard")
     }
 
     const updateText = event => {
