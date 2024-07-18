@@ -1,8 +1,10 @@
 import './App.css';
+import About from './components/About.js';
 import Alert from './components/Alert.js';
 import Navbar from './components/Navbar.js';
 import TextArea from './components/TextArea.js';
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -26,6 +28,7 @@ function App() {
       setFunctionBtn("bg-white text-black")
       setDarkMode(true)
       passAlert("Dark Mode has been enabled.")
+      document.title = "Word Press - Dark Mode";
     }
     else {
       setNavBg("bg-blue-200 text-black")
@@ -34,14 +37,22 @@ function App() {
       setFunctionBtn("bg-blue-500 text-white")
       setDarkMode(false)
       passAlert("Light Mode has been enabled.")
+      document.title = "Word Press - Light Mode";
     }
   }
 
   return (
     <>
+      <Router>
       <Navbar navBg={navBg} toggleMode={toggleMode} modeBtn={modeBtn} title="WordPress"/>
       <Alert showAlert={showAlert}/>
-      <TextArea functionBtn={functionBtn} darkMode={darkMode} passAlert={passAlert}/>
+        <Routes>
+          <Route path="/about" element={<About darkMode={darkMode}/>}/>
+
+          <Route path="/home" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passAlert={passAlert}/>}/>
+          <Route path="*" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passAlert={passAlert}/>}/>
+        </Routes>
+      </Router>
     </>
   );
 }
