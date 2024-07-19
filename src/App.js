@@ -13,6 +13,7 @@ function App() {
   const [functionBtn, setFunctionBtn] = useState("bg-blue-500 text-white")
   const [showAlert, setShowAlert] = useState(null)
   const [btnAlert, setBtnAlert] = useState(null)
+  const [aboutMode, setAboutMode] = useState("bg-white text-black")
 
   const passBtnAlert = (msg) => {
     setBtnAlert(msg)
@@ -36,7 +37,8 @@ function App() {
       setFunctionBtn("bg-white text-black")
       setDarkMode(true)
       passAlert("Dark Mode has been enabled.")
-      document.title = "Word Press - Dark Mode";
+      setAboutMode("bg-slate-800 text-white");
+      // document.title = "Word Press - Dark Mode";
     }
     else {
       setNavBg("bg-blue-200 text-black")
@@ -45,7 +47,8 @@ function App() {
       setFunctionBtn("bg-blue-500 text-white")
       setDarkMode(false)
       passAlert("Light Mode has been enabled.")
-      document.title = "Word Press - Light Mode";
+      setAboutMode("bg-white text-black");
+      // document.title = "Word Press - Light Mode";
     }
   }
 
@@ -55,7 +58,7 @@ function App() {
       <Navbar navBg={navBg} toggleMode={toggleMode} modeBtn={modeBtn} title="WordPress"/>
       <Alert showAlert={showAlert} btnAlert={btnAlert}/>
         <Routes>
-          <Route path="/about" element={<About darkMode={darkMode}/>}/>
+          <Route path="/about" element={<About darkMode={darkMode} aboutMode={aboutMode}/>}/>
 
           <Route path="/home" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passBtnAlert={passBtnAlert}/>}/>
           <Route path="*" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passBtnAlert={passBtnAlert}/>}/>
