@@ -2,26 +2,30 @@ import React, {useState} from 'react'
 
 export default function TextArea(props) {
     const [text, setText] = useState("")
+    
+    if (text.length === 0) {
+        props.passBtnAlert(null)
+    }
 
     const upperCase = () => {
         setText(text.toUpperCase());
-        props.passAlert("Text Is Converted Into Upper Case")
+        props.passBtnAlert("Text Is Converted Into Upper Case")
     }
 
     const lowerCase = () => {
         setText(text.toLowerCase());
-        props.passAlert("Text Is Converted Into Lower Case")
+        props.passBtnAlert("Text Is Converted Into Lower Case")
     }
 
     const resetText = () => {
         setText("")
-        props.passAlert("Text Is Cleared")
+        props.passBtnAlert("Text Is Cleared")
     }
 
     const trimText = () => {
         let trimOne = text.replace(/\s+/g, " ")
         setText(trimOne)
-        props.passAlert("Text Is Trimed")
+        props.passBtnAlert("Text Is Trimed")
     }
 
     const copyText = () => {
@@ -29,7 +33,7 @@ export default function TextArea(props) {
         copyOne.select()
         navigator.clipboard.writeText(copyOne.value)
         // window.getSelection().removeAllRanges()
-        props.passAlert("Text Is Copied To Your Clipboard")
+        props.passBtnAlert("Text Is Copied To Your Clipboard")
     }
 
     const updateText = event => {
@@ -54,14 +58,14 @@ export default function TextArea(props) {
             </div>
             <div className='space-y-4 pt-11' style={{color: props.darkMode?"white":"black"}}>
                 <h3 className='text-center font-semibold text-lg'>Text Summary</h3>
-                <div>
-                    <table>
+                <table>
+                    <thead>
                         <tr>
-                            <td className={`border-2 ${props.darkMode?'border-white':'border-black'} px-3 py-2`}>{text.trim().split(/\s+/).length} words and {text.length} letters</td>
+                            <td className={`border-2 ${props.darkMode?'border-white':'border-black'} px-3 py-2`}>{text.split(" ").filter((element) => {return element.length!==0}).length} words and {text.length} letters</td>
                             <td className={`border-2 ${props.darkMode?'border-white':'border-black'} px-3 py-2`}>{(0.002*text.length).toFixed(2)} min to read</td>
                         </tr>
-                    </table>
-                </div>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

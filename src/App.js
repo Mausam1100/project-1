@@ -12,6 +12,14 @@ function App() {
   const [modeBtn, setModeBtn] = useState("bg-slate-800 text-white")
   const [functionBtn, setFunctionBtn] = useState("bg-blue-500 text-white")
   const [showAlert, setShowAlert] = useState(null)
+  const [btnAlert, setBtnAlert] = useState(null)
+
+  const passBtnAlert = (msg) => {
+    setBtnAlert(msg)
+    setTimeout(() => {
+      setShowAlert(null)
+    }, 2200);
+  }
 
   const passAlert = (msg) => {
     setShowAlert(msg)
@@ -45,12 +53,12 @@ function App() {
     <>
       <Router>
       <Navbar navBg={navBg} toggleMode={toggleMode} modeBtn={modeBtn} title="WordPress"/>
-      <Alert showAlert={showAlert}/>
+      <Alert showAlert={showAlert} btnAlert={btnAlert}/>
         <Routes>
           <Route path="/about" element={<About darkMode={darkMode}/>}/>
 
-          <Route path="/home" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passAlert={passAlert}/>}/>
-          <Route path="*" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passAlert={passAlert}/>}/>
+          <Route path="/home" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passBtnAlert={passBtnAlert}/>}/>
+          <Route path="*" element={<TextArea functionBtn={functionBtn} darkMode={darkMode} passBtnAlert={passBtnAlert}/>}/>
         </Routes>
       </Router>
     </>

@@ -23,6 +23,6 @@ export default function Navbar(props) {
   )
 }
 
-Navbar.defaultProps = {
-    title: "Title"
-}
+// Navbar.defaultProps = {
+//     title: "Title"
+// }
